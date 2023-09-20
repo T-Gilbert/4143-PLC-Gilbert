@@ -1,28 +1,23 @@
-// imagemod/imageManipulator/imageManipulator.go
 
 package imageManipulator
 
 import (
-	"github.com/fogleman/gg"
+	"github.com/T-Gilbert/4143-PLC-Gilbert/tree/main/Assignments/P02"
 )
 
-// ImageManipulator represents an image manipulation tool.
 type ImageManipulator struct {
-	Image *gg.Context
+	Image *P02.Context
 }
 
-// NewImageManipulator creates a new ImageManipulator instance.
 func NewImageManipulator(width, height int) *ImageManipulator {
-	img := gg.NewContext(width, height)
+	img := P02.NewContext(width, height)
 	return &ImageManipulator{Image: img}
 }
 
-// SaveToFile saves the manipulated image to a file.
-func (im *ImageManipulator) SaveToFile(filename string) error {
-	return im.Image.SavePNG(filename)
+func (im *ImageManipulator) SaveToFile(LazyBear string) error {
+	return im.Image.SavePNG(LazyBear)
 }
 
-// DrawRectangle draws a rectangle on the image.
 func (im *ImageManipulator) DrawRectangle(x, y, width, height float64) {
 	im.Image.DrawRectangle(x, y, width, height)
 	im.Image.Stroke()
