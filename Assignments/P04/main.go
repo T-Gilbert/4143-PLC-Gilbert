@@ -10,7 +10,6 @@ import (
   "time"
 )
 
-// Sequential version of the image downloader.
 func downloadImagesSequential(urls []string) {
   for _, url := range urls {
     filename := generateFilename(url)
@@ -21,7 +20,6 @@ func downloadImagesSequential(urls []string) {
   }
 }
 
-// Concurrent version of the image downloader.
 func downloadImagesConcurrent(urls []string) {
   var wg sync.WaitGroup
   errors := make(chan error, len(urls))
@@ -48,7 +46,6 @@ func downloadImagesConcurrent(urls []string) {
   }
 }
 
-// Helper function to download and save a single image.
 func downloadImage(url, filename string) error {
   response, err := http.Get(url)
   if err != nil {
@@ -75,7 +72,6 @@ func downloadImage(url, filename string) error {
   return nil
 }
 
-// Helper function to generate a unique filename based on the URL.
 func generateFilename(url string) string {
   ext := filepath.Ext(url)
   return fmt.Sprintf("%d%s", time.Now().UnixNano(), ext)
@@ -91,12 +87,10 @@ func main() {
     // Add more image URLs
   }
 
-  // Sequential download
   start := time.Now()
   downloadImagesSequential(urls)
   fmt.Printf("Sequential download took: %v\n", time.Since(start))
 
-  // Concurrent download
   start = time.Now()
   downloadImagesConcurrent(urls)
   fmt.Printf("Concurrent download took: %v\n", time.Since(start))
